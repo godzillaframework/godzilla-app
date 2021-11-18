@@ -7,6 +7,12 @@ import (
 	"github.com/godzillaframework/godzilla"
 )
 
+/* strucutre for json */
+type User struct {
+	Username string
+	Password string
+}
+
 /* main func */
 func main() {
 	/* new godzilla app */
@@ -25,6 +31,16 @@ func main() {
 	gz.Static("/static", "./imgs")
 
 	gz.Static("/main", "./hello.html")
+
+	/* start of json examples */
+
+	gz.Get("/jsontest", func(ctx godzilla.Context) {
+		var usertable = User{Username: "UserOne", Password: "PasswordOne"}
+
+		ctx.SendJSON(&usertable)
+	})
+
+	/* end */
 
 	/* middlewares */
 
